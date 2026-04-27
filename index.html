@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0608">
+<title>LoveLAB 運命鑑定 | NEXA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:#0a0608;
+  min-height:100vh;
+  font-family:'Noto Sans JP',sans-serif;
+  color:#f0ece8;
+  overflow-x:hidden;
+  position:relative;
+}
+canvas#stars{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+.wrap{
+  position:relative;
+  z-index:1;
+  max-width:440px;
+  margin:0 auto;
+  padding:48px 24px 60px;
+}
+
+/* brand */
+.brand{text-align:center;margin-bottom:36px;}
+.brand-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;
+  letter-spacing:.5em;
+  color:#c9a96e;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.brand-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;
+  font-weight:700;
+  color:#f8f0e8;
+  line-height:1.1;
+  letter-spacing:.04em;
+}
+.brand-title span{color:#c4637a;}
+.brand-sub{
+  font-family:'Noto Serif JP',serif;
+  font-size:13px;
+  color:rgba(255,255,255,.45);
+  margin-top:12px;
+  letter-spacing:.05em;
+}
+
+/* divider */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:28px 0;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(196,99,122,.4),transparent);
+}
+.divider-icon{color:#c9a96e;font-size:14px;letter-spacing:6px;}
+
+/* copy */
+.copy{
+  text-align:center;
+  margin-bottom:32px;
+}
+.copy h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:19px;
+  font-weight:600;
+  line-height:1.75;
+  color:#f8f0e8;
+}
+.copy h2 em{
+  font-style:normal;
+  color:#c4637a;
+}
+
+/* features */
+.features{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(196,99,122,.2);
+  border-radius:18px;
+  padding:24px 20px;
+  margin-bottom:28px;
+}
+.feat{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.feat:last-child{border-bottom:none;}
+.feat-icon{
+  font-size:18px;
+  min-width:28px;
+  text-align:center;
+  margin-top:2px;
+}
+.feat-text{
+  font-size:14px;
+  line-height:1.7;
+  color:rgba(255,255,255,.82);
+  font-family:'Noto Sans JP',sans-serif;
+}
+.feat-text strong{color:#c9a96e;font-weight:500;}
+
+/* price */
+.price-box{
+  text-align:center;
+  margin-bottom:28px;
+}
+.price-label{
+  font-size:11px;
+  letter-spacing:.3em;
+  color:rgba(255,255,255,.35);
+  margin-bottom:6px;
+  font-family:'Cormorant Garamond',serif;
+  text-transform:uppercase;
+}
+.price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:58px;
+  font-weight:700;
+  color:#c4637a;
+  line-height:1;
+}
+.price-yen{font-size:32px;vertical-align:super;}
+.price-note{
+  font-size:11px;
+  color:rgba(255,255,255,.3);
+  margin-top:6px;
+  letter-spacing:.05em;
+}
+
+/* CTA button */
+.btn-wrap{margin-bottom:20px;}
+.btn{
+  display:block;
+  width:100%;
+  padding:20px 16px;
+  border:none;
+  border-radius:60px;
+  background:linear-gradient(135deg,#c4637a 0%,#c9a96e 50%,#c4637a 100%);
+  background-size:200% 100%;
+  animation:btnshine 3s ease-in-out infinite;
+  color:#fff;
+  font-family:'Noto Serif JP',serif;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:.05em;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+  box-shadow:0 0 40px rgba(196,99,122,.5),0 0 80px rgba(196,99,122,.2);
+  transition:transform .15s,box-shadow .15s;
+}
+.btn:active{transform:scale(.97);}
+.btn small{
+  display:block;
+  font-size:11px;
+  opacity:.8;
+  margin-top:4px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-weight:300;
+  letter-spacing:.1em;
+}
+@keyframes btnshine{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
+
+/* cards */
+.cards-box{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
+}
+.cards-box p{
+  color:#555;
+  font-size:10px;
+  margin-bottom:8px;
+  letter-spacing:.1em;
+}
+.cards-box img{width:100%;max-width:260px;}
+
+/* footer note */
+.footer-note{
+  text-align:center;
+  margin-top:36px;
+  font-size:11px;
+  color:rgba(255,255,255,.2);
+  line-height:1.9;
+  letter-spacing:.03em;
+}
+.footer-note a{color:rgba(196,99,122,.5);text-decoration:none;}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="wrap">
+
+  <div class="brand">
+    <p class="brand-label">NEXA &nbsp;|&nbsp; AI Fortune</p>
+    <h1 class="brand-title">Love<span>LAB</span></h1>
+    <p class="brand-sub">運命鑑定 &mdash; あなたの本質と愛の行方を読み解く</p>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦ ✦ ✦</span></div>
+
+  <div class="copy">
+    <h2>
+      二人の<em>深層</em>を、<br>
+      星と数字が解き明かす。<br>
+      <em>今だけ特別価格</em>で鑑定開始。
+    </h2>
+  </div>
+
+  <div class="features">
+    <div class="feat">
+      <span class="feat-icon">🔮</span>
+      <p class="feat-text"><strong>本質鑑定</strong>：生年月日・星座・干支から隠れた本質を分析</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">💫</span>
+      <p class="feat-text"><strong>縁の深さ</strong>：なぜ惹かれるのか、二人の魂の接点を解読</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📅</span>
+      <p class="feat-text"><strong>運気の波</strong>：今年の流れと、動くべきベストタイミング</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">💌</span>
+      <p class="feat-text"><strong>成就の鍵</strong>：この恋を実らせるための具体的なアドバイス</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">♾️</span>
+      <p class="feat-text"><strong>使い放題</strong>：一度購入すればいつでも何度でも鑑定可能</p>
+    </div>
+  </div>
+
+  <div class="price-box">
+    <p class="price-label">Special Price</p>
+    <p class="price"><span class="price-yen">¥</span>780</p>
+    <p class="price-note">買い切り &nbsp;|&nbsp; 使い放題 &nbsp;|&nbsp; 即日アクセス</p>
+  </div>
+
+  <div class="btn-wrap">
+    <a href="https://www.paypal.com/ncp/payment/AMEJ4V5C564UN" class="btn">
+      ✨ 今すぐ運命鑑定を受ける
+      <small>PayPal / クレジットカード 対応</small>
+    </a>
+  </div>
+
+  <div class="cards-box">
+    <p>安心のPayPal決済に対応</p>
+    <img src="/cards.png" alt="対応カード">
+  </div>
+
+  <p class="footer-note">
+    © NEXA &nbsp;|&nbsp; AI Fortune<br>
+    <a href="mailto:chabin0323@gmail.com">お問い合わせ</a>
+  </p>
+
+</div>
+
+<script>
+(function(){
+  var c=document.getElementById('stars');
+  var ctx=c.getContext('2d');
+  var stars=[];
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  function init(){
+    stars=[];
+    for(var i=0;i<160;i++){
+      stars.push({
+        x:Math.random()*c.width,
+        y:Math.random()*c.height,
+        r:Math.random()*1.4+.2,
+        a:Math.random(),
+        da:(Math.random()*.006+.002)*(Math.random()<.5?1:-1)
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.a+=s.da;
+      if(s.a>1||s.a<0)s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,245,235,'+s.a.toFixed(2)+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',function(){resize();init();});
+  resize();init();draw();
+})();
+</script>
+</body>
+</html>
