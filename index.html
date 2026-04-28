@@ -186,20 +186,71 @@ canvas#stars{
   100%{background-position:-200% 0;}
 }
 
-/* cards */
-.cards-box{
-  background:#fff;
-  border-radius:12px;
-  padding:14px;
+/* relationship */
+.rel-section{
+  margin-bottom:28px;
   text-align:center;
 }
-.cards-box p{
-  color:#555;
-  font-size:10px;
-  margin-bottom:8px;
-  letter-spacing:.1em;
+.rel-label{
+  font-size:11px;
+  color:rgba(201,169,110,.7);
+  letter-spacing:.15em;
+  margin-bottom:14px;
+  font-family:'Cormorant Garamond',serif;
 }
-.cards-box img{width:100%;max-width:260px;}
+.rel-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+.rel-tag{
+  font-size:12px;
+  font-family:'Noto Sans JP',sans-serif;
+  color:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(196,99,122,.25);
+  border-radius:20px;
+  padding:7px 14px;
+  letter-spacing:.04em;
+}
+
+/* cards */
+.cards-box{
+  background:rgba(255,255,255,.96);
+  border-radius:16px;
+  padding:16px 20px;
+  text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+.cards-box p{
+  color:#666;
+  font-size:10px;
+  margin-bottom:12px;
+  letter-spacing:.15em;
+  font-weight:600;
+}
+.cards-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  align-items:center;
+}
+.card-badge{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:28px;
+  padding:0 10px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.04em;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  min-width:52px;
+}
+.card-badge img{width:100%;max-width:260px;}
 
 /* footer note */
 .footer-note{
@@ -236,7 +287,7 @@ canvas#stars{
   <div class="features">
     <div class="feat">
       <span class="feat-icon">🔮</span>
-      <p class="feat-text"><strong>本質鑑定</strong>：生年月日・星座・干支から隠れた本質を分析</p>
+      <p class="feat-text"><strong>本質鑑定</strong>：生年月日・血液型・星座・干支から隠れた本質を分析</p>
     </div>
     <div class="feat">
       <span class="feat-icon">💫</span>
@@ -256,6 +307,19 @@ canvas#stars{
     </div>
   </div>
 
+  <div class="rel-section">
+    <p class="rel-label">✦ こんな関係も鑑定できます ✦</p>
+    <div class="rel-tags">
+      <span class="rel-tag">💕 恋人</span>
+      <span class="rel-tag">💘 片思い</span>
+      <span class="rel-tag">💍 夫婦</span>
+      <span class="rel-tag">🤝 友人</span>
+      <span class="rel-tag">💼 仕事仲間</span>
+      <span class="rel-tag">📋 商談相手</span>
+      <span class="rel-tag">👔 上司</span>
+    </div>
+  </div>
+
   <div class="price-box">
     <p class="price-label">Special Price</p>
     <p class="price"><span class="price-yen">¥</span>780</p>
@@ -271,14 +335,22 @@ canvas#stars{
 
   <div class="cards-box">
     <p>安心のPayPal決済に対応</p>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px;">
-      <span style="background:#1a1f71;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;letter-spacing:.05em;">VISA</span>
-      <span style="background:#eb001b;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;">Master</span>
-      <span style="background:#003087;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;">JCB</span>
-      <span style="background:#2557d6;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;">AMEX</span>
-      <span style="background:#ff6600;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;">Discover</span>
-      <span style="background:#003087;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;">PayPal</span>
-      <span style="background:#000;color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:4px;"> Apple Pay</span>
+    <div class="cards-grid">
+      <div class="card-badge" style="background:linear-gradient(135deg,#1a1f71,#2b3296);color:#fff;">
+        <svg width="38" height="13" viewBox="0 0 38 13" fill="none"><text x="0" y="11" font-family="Arial" font-weight="900" font-size="12" fill="white">VISA</text></svg>
+      </div>
+      <div class="card-badge" style="background:#fff;border:1px solid #ddd;padding:0 6px;">
+        <svg width="38" height="24" viewBox="0 0 38 24"><circle cx="14" cy="12" r="10" fill="#EB001B"/><circle cx="24" cy="12" r="10" fill="#F79E1B"/><path d="M19 5.27a10 10 0 010 13.46A10 10 0 0119 5.27z" fill="#FF5F00"/></svg>
+      </div>
+      <div class="card-badge" style="background:linear-gradient(135deg,#003087,#0070ba);color:#fff;">JCB</div>
+      <div class="card-badge" style="background:linear-gradient(135deg,#2557d6,#1a44c0);color:#fff;font-size:10px;">AMEX</div>
+      <div class="card-badge" style="background:linear-gradient(135deg,#003087,#009cde);color:#fff;">
+        <svg width="50" height="14" viewBox="0 0 50 14" fill="none"><text x="0" y="11" font-family="Arial" font-weight="900" font-size="11" fill="white">PayPal</text></svg>
+      </div>
+      <div class="card-badge" style="background:#000;color:#fff;font-size:10px;gap:4px;">
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 0C3.13 0 0 3.13 0 7s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7z" fill="white"/></svg>
+         Pay
+      </div>
     </div>
   </div>
 
